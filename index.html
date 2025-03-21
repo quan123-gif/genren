@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>学习计划任务管理</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>学习计划任务管理</h1>
+            <nav>
+                <ul>
+                    <li class="active" data-target="month-plan">月计划</li>
+                    <li data-target="day-plan">日计划</li>
+                    <li data-target="weekend-plan">周末计划</li>
+                    <li data-target="notes">注意事项</li>
+                    <li data-target="timer">专注计时</li>
+                </ul>
+            </nav>
+        </header>
+
+        <main>
+            <!-- 月计划部分 -->
+            <section id="month-plan" class="plan-section active">
+                <div class="section-header">
+                    <h2>月计划 (2025年3月-5月)</h2>
+                    <button class="add-plan-btn" data-type="month"><i class="fas fa-plus"></i> 添加阶段</button>
+                </div>
+                <div class="plan-container">
+                    <!-- 月计划内容将通过JS动态生成 -->
+                </div>
+            </section>
+
+            <!-- 日计划部分 -->
+            <section id="day-plan" class="plan-section">
+                <div class="section-header">
+                    <h2>日计划表</h2>
+                    <div class="day-selector">
+                        <button class="day-btn active" data-day="monday">周一</button>
+                        <button class="day-btn" data-day="tuesday">周二</button>
+                        <button class="day-btn" data-day="wednesday">周三</button>
+                        <button class="day-btn" data-day="thursday">周四</button>
+                        <button class="day-btn" data-day="friday">周五</button>
+                    </div>
+                    <button class="add-plan-btn" data-type="day"><i class="fas fa-plus"></i> 添加任务</button>
+                </div>
+                <div class="plan-container day-plan-container">
+                    <!-- 日计划内容将通过JS动态生成 -->
+                </div>
+            </section>
+
+            <!-- 周末计划部分 -->
+            <section id="weekend-plan" class="plan-section">
+                <div class="section-header">
+                    <h2>周末计划表</h2>
+                    <div class="day-selector">
+                        <button class="day-btn active" data-day="saturday">周六</button>
+                        <button class="day-btn" data-day="sunday">周日</button>
+                    </div>
+                    <button class="add-plan-btn" data-type="weekend"><i class="fas fa-plus"></i> 添加任务</button>
+                </div>
+                <div class="plan-container weekend-plan-container">
+                    <!-- 周末计划内容将通过JS动态生成 -->
+                </div>
+            </section>
+
+            <!-- 注意事项部分 -->
+            <section id="notes" class="plan-section">
+                <div class="section-header">
+                    <h2>注意事项</h2>
+                    <button class="add-plan-btn" data-type="note"><i class="fas fa-plus"></i> 添加注意事项</button>
+                </div>
+                <div class="plan-container notes-container">
+                    <!-- 注意事项内容将通过JS动态生成 -->
+                </div>
+            </section>
+
+            <!-- 专注计时器部分 -->
+            <section id="timer" class="plan-section">
+                <div class="section-header">
+                    <h2>专注计时器</h2>
+                </div>
+                <div class="timer-container">
+                    <div class="timer-mode">
+                        <button class="mode-btn active" data-mode="work">工作</button>
+                        <button class="mode-btn" data-mode="rest">休息</button>
+                    </div>
+                    
+                    <div class="timer-display">
+                        <div class="timer-progress-container">
+                            <div class="timer-progress"></div>
+                            <div class="timer-time">25:00</div>
+                        </div>
+                    </div>
+                    
+                    <div class="timer-presets">
+                        <button class="preset-btn active" data-time="25">25分钟</button>
+                        <button class="preset-btn" data-time="45">45分钟</button>
+                        <button class="preset-btn" data-time="60">60分钟</button>
+                        <div class="custom-time">
+                            <input type="number" id="custom-minutes" min="1" max="120" placeholder="自定义分钟">
+                            <button id="apply-custom">确定</button>
+                        </div>
+                    </div>
+                    
+                    <div class="timer-controls">
+                        <button id="start-timer" class="control-btn start"><i class="fas fa-play"></i></button>
+                        <button id="pause-timer" class="control-btn pause"><i class="fas fa-pause"></i></button>
+                        <button id="reset-timer" class="control-btn reset"><i class="fas fa-redo"></i></button>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- 添加/编辑计划的模态框 -->
+    <div class="modal-container" id="plan-modal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3>添加计划</h3>
+                <button class="close-modal"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <form id="plan-form">
+                    <input type="hidden" id="edit-id">
+                    <input type="hidden" id="plan-type">
+                    
+                    <div class="form-group month-field">
+                        <label for="stage-name">阶段名称</label>
+                        <input type="text" id="stage-name" placeholder="如：基础阶段">
+                    </div>
+                    
+                    <div class="form-group month-field">
+                        <label for="stage-time">时间范围</label>
+                        <input type="text" id="stage-time" placeholder="如：3月-4月中旬">
+                    </div>
+                    
+                    <div class="form-group day-field weekend-field">
+                        <label for="task-time">时间</label>
+                        <input type="text" id="task-time" placeholder="如：7:00-7:30">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="task-name">任务名称</label>
+                        <input type="text" id="task-name" placeholder="输入任务名称">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="task-details">执行细节/注意事项</label>
+                        <textarea id="task-details" placeholder="输入任务详情"></textarea>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="button" id="delete-plan" class="delete-btn">删除</button>
+                        <button type="submit" id="save-plan">保存</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/app.js"></script>
+    <script src="js/timer.js"></script>
+</body>
+</html> 

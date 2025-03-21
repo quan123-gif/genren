@@ -1,0 +1,607 @@
+/* 基础样式重置 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    background-color: #f5f7fa;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* 容器样式 */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* 头部样式 */
+header {
+    margin-bottom: 30px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    padding: 20px;
+}
+
+header h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #3498db;
+}
+
+nav ul {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    border-bottom: 1px solid #eee;
+}
+
+nav li {
+    padding: 10px 20px;
+    cursor: pointer;
+    margin: 0 5px;
+    transition: all 0.3s ease;
+    border-bottom: 3px solid transparent;
+}
+
+nav li.active {
+    border-bottom: 3px solid #3498db;
+    color: #3498db;
+    font-weight: bold;
+}
+
+nav li:hover {
+    color: #3498db;
+}
+
+/* 部分样式 */
+.plan-section {
+    display: none;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.plan-section.active {
+    display: block;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.section-header h2 {
+    color: #2c3e50;
+    margin-bottom: 10px;
+}
+
+/* 日/周末选择器样式 */
+.day-selector {
+    display: flex;
+    margin: 10px 0;
+}
+
+.day-btn {
+    padding: 5px 10px;
+    margin-right: 5px;
+    background-color: #eee;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.day-btn.active {
+    background-color: #3498db;
+    color: white;
+}
+
+/* 计划容器样式 */
+.plan-container {
+    min-height: 200px;
+}
+
+/* 计划卡片样式 */
+.plan-card {
+    background-color: #f8f9fa;
+    border-left: 4px solid #3498db;
+    border-radius: 5px;
+    padding: 15px;
+    margin-bottom: 15px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+.plan-card:hover {
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+}
+
+.plan-card h3 {
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.plan-card p {
+    margin-bottom: 5px;
+    font-size: 0.95em;
+}
+
+.plan-card .time {
+    color: #7f8c8d;
+    font-weight: bold;
+}
+
+.plan-card .details {
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px dashed #ddd;
+}
+
+.edit-btns {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: flex;
+}
+
+.edit-btn, .delete-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    margin-left: 5px;
+    color: #95a5a6;
+    transition: all 0.3s ease;
+}
+
+.edit-btn:hover {
+    color: #3498db;
+}
+
+.delete-btn:hover {
+    color: #e74c3c;
+}
+
+/* 月计划特定样式 */
+.stage-card {
+    margin-bottom: 25px;
+}
+
+.stage-title {
+    font-size: 1.2em;
+    background-color: #ecf0f1;
+    padding: 10px 15px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.stage-title span {
+    color: #7f8c8d;
+    font-size: 0.85em;
+}
+
+.stage-goals {
+    margin-left: 20px;
+}
+
+/* 添加按钮样式 */
+.add-plan-btn {
+    background-color: #2ecc71;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+}
+
+.add-plan-btn i {
+    margin-right: 5px;
+}
+
+.add-plan-btn:hover {
+    background-color: #27ae60;
+}
+
+/* 模态框样式 */
+.modal-container {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 100;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal {
+    background-color: white;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 600px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    animation: modalFadeIn 0.3s ease forwards;
+}
+
+@keyframes modalFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.modal-header {
+    padding: 15px 20px;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-header h3 {
+    color: #2c3e50;
+}
+
+.close-modal {
+    background: none;
+    border: none;
+    font-size: 1.2em;
+    cursor: pointer;
+    color: #7f8c8d;
+}
+
+.close-modal:hover {
+    color: #e74c3c;
+}
+
+.modal-body {
+    padding: 20px;
+}
+
+/* 表单样式 */
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: #2c3e50;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-family: inherit;
+}
+
+.form-group textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
+}
+
+#save-plan {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+#save-plan:hover {
+    background-color: #2980b9;
+}
+
+#delete-plan {
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 10px;
+    transition: all 0.3s ease;
+}
+
+#delete-plan:hover {
+    background-color: #c0392b;
+}
+
+/* 计时器样式 */
+.timer-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px;
+    border-radius: 15px;
+    transition: background-color 0.5s ease;
+}
+
+.timer-container.work-mode {
+    background-color: rgba(52, 152, 219, 0.1);
+}
+
+.timer-container.rest-mode {
+    background-color: rgba(46, 204, 113, 0.1);
+}
+
+.timer-mode {
+    display: flex;
+    margin-bottom: 30px;
+}
+
+.mode-btn {
+    padding: 10px 25px;
+    margin: 0 10px;
+    border: none;
+    border-radius: 30px;
+    background-color: #eee;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.mode-btn.active[data-mode="work"] {
+    background-color: #3498db;
+    color: white;
+    box-shadow: 0 3px 10px rgba(52, 152, 219, 0.3);
+}
+
+.mode-btn.active[data-mode="rest"] {
+    background-color: #2ecc71;
+    color: white;
+    box-shadow: 0 3px 10px rgba(46, 204, 113, 0.3);
+}
+
+.mode-btn:hover {
+    transform: translateY(-2px);
+}
+
+.timer-display {
+    margin: 30px 0;
+    width: 300px;
+    height: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.timer-progress-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background-color: #f5f5f5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+}
+
+.timer-progress {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: conic-gradient(
+        var(--progress-color) var(--progress-percent),
+        transparent var(--progress-percent)
+    );
+    transform: rotate(-90deg);
+    --progress-color: #3498db;
+    --progress-percent: 100%;
+}
+
+.rest-mode .timer-progress {
+    --progress-color: #2ecc71;
+}
+
+.timer-time {
+    position: relative;
+    font-size: 48px;
+    font-weight: bold;
+    color: #333;
+    z-index: 1;
+}
+
+.timer-presets {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.preset-btn {
+    padding: 10px 20px;
+    margin: 0 8px 10px;
+    border: none;
+    border-radius: 30px;
+    background-color: #eee;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.preset-btn.active {
+    background-color: #3498db;
+    color: white;
+    box-shadow: 0 3px 8px rgba(52, 152, 219, 0.3);
+}
+
+.rest-mode .preset-btn.active {
+    background-color: #2ecc71;
+    box-shadow: 0 3px 8px rgba(46, 204, 113, 0.3);
+}
+
+.preset-btn:hover {
+    transform: translateY(-2px);
+}
+
+.custom-time {
+    display: flex;
+    margin: 10px;
+}
+
+#custom-minutes {
+    width: 120px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 30px 0 0 30px;
+    text-align: center;
+    font-size: 14px;
+}
+
+#apply-custom {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 0 30px 30px 0;
+    background-color: #3498db;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.rest-mode #apply-custom {
+    background-color: #2ecc71;
+}
+
+#apply-custom:hover {
+    background-color: #2980b9;
+}
+
+.rest-mode #apply-custom:hover {
+    background-color: #27ae60;
+}
+
+.timer-controls {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.control-btn {
+    width: 70px;
+    height: 70px;
+    margin: 0 15px;
+    border: none;
+    border-radius: 50%;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.control-btn:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+}
+
+.control-btn:active {
+    transform: translateY(1px);
+}
+
+.start {
+    background-color: #2ecc71;
+}
+
+.start:hover {
+    background-color: #27ae60;
+}
+
+.pause {
+    background-color: #f39c12;
+}
+
+.pause:hover {
+    background-color: #d35400;
+}
+
+.reset {
+    background-color: #e74c3c;
+}
+
+.reset:hover {
+    background-color: #c0392b;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    nav ul {
+        flex-wrap: wrap;
+    }
+    
+    nav li {
+        flex: 1 0 45%;
+        text-align: center;
+        margin-bottom: 5px;
+    }
+    
+    .section-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .add-plan-btn {
+        margin-top: 10px;
+    }
+    
+    .day-selector {
+        overflow-x: auto;
+        width: 100%;
+        padding-bottom: 10px;
+    }
+    
+    .timer-display {
+        width: 250px;
+        height: 250px;
+    }
+    
+    .timer-time {
+        font-size: 40px;
+    }
+    
+    .control-btn {
+        width: 60px;
+        height: 60px;
+        margin: 0 10px;
+    }
+} 
